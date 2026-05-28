@@ -4,6 +4,7 @@ public record ComprobanteResponseDTO(
         Long reservaId,
         String clienteId,
         String nombreArchivo,
-        long tamanioBytes
+        long tamanioBytes,
+        String mensaje
 ) {
 }

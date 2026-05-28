@@ -28,32 +28,39 @@ public class SalaService {
     }
 
     public SalaResponseDTO obtenerPorId(Long id) {
-        Sala sala = buscarSala(id);
-        return SalaMapper.toResponseDTO(sala);
+        return SalaMapper.toResponseDTO(resolverSala(id));
     }
 
-    public SalaResponseDTO crear(SalaRequestDTO requestDTO) {
-        boolean activa = requestDTO.activa() == null || requestDTO.activa();
-        Sala sala = SalaMapper.toModel(requestDTO, activa);
-        Sala salaGuardada = salaRepository.save(sala);
-        return SalaMapper.toResponseDTO(salaGuardada);
+    public SalaResponseDTO crear(SalaRequestDTO dto) {
+        validarDatosSala(dto);
+        boolean activa = dto.activa() == null || dto.activa();
+        Sala nuevaSala = SalaMapper.toModel(dto, activa);
+        return SalaMapper.toResponseDTO(salaRepository.save(nuevaSala));
     }
 
-    public SalaResponseDTO actualizar(Long id, SalaRequestDTO requestDTO) {
-        Sala sala = buscarSala(id);
-        SalaMapper.updateModel(sala, requestDTO);
-        Sala salaActualizada = salaRepository.update(sala);
-        return SalaMapper.toResponseDTO(salaActualizada);
+    public SalaResponseDTO actualizar(Long id, SalaRequestDTO dto) {
+        validarDatosSala(dto);
+        Sala sala = resolverSala(id);
+        SalaMapper.updateModel(sala, dto);
+        return SalaMapper.toResponseDTO(salaRepository.update(sala));
     }
 
     public void eliminar(Long id) {
-        buscarSala(id);
+        resolverSala(id);
         reservaRepository.deleteBySalaId(id);
         salaRepository.deleteById(id);
     }
 
-    private Sala buscarSala(Long id) {
+    // ---------- helpers privados ----------
+
+    private Sala resolverSala(Long id) {
         return salaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No existe una sala con id " + id));
+                .orElseThrow(() -> new RuntimeException("Sala no encontrada con id: " + id));
+    }
+
+    private void validarDatosSala(SalaRequestDTO dto) {
+        if (dto.capacidad() != null && dto.capacidad() <= 0) {
+            throw new RuntimeException("La capacidad de la sala debe ser mayor a cero");
+        }
     }
 }

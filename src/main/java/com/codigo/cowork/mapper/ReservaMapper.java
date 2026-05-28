@@ -6,17 +6,22 @@ import com.codigo.cowork.model.Reserva;
 
 public class ReservaMapper {
 
-    private ReservaMapper() {}
+    private ReservaMapper() {
+        throw new UnsupportedOperationException("Clase utilitaria — no instanciar");
+    }
 
     public static Reserva toModel(ReservaRequestDTO dto) {
-        Reserva reserva = new Reserva();
-        reserva.setSalaId(dto.salaId());
-        reserva.setResponsable(dto.responsable());
-        reserva.setEmail(dto.email());
-        reserva.setFecha(dto.fecha());
-        reserva.setHoraInicio(dto.horaInicio());
-        reserva.setHoraFin(dto.horaFin());
-        return reserva;
+        return new Reserva(
+                null,
+                dto.salaId(),
+                dto.responsable(),
+                dto.email(),
+                dto.fecha(),
+                dto.horaInicio(),
+                dto.horaFin(),
+                null,
+                null
+        );
     }
 
     public static ReservaResponseDTO toResponseDTO(Reserva reserva) {

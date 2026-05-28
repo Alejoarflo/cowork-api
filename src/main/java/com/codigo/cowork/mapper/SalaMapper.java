@@ -6,16 +6,12 @@ import com.codigo.cowork.model.Sala;
 
 public class SalaMapper {
 
-    private SalaMapper() {}
+    private SalaMapper() {
+        throw new UnsupportedOperationException("Clase utilitaria — no instanciar");
+    }
 
     public static Sala toModel(SalaRequestDTO dto, boolean activa) {
-        Sala sala = new Sala();
-        sala.setCodigo(dto.codigo());
-        sala.setNombre(dto.nombre());
-        sala.setCapacidad(dto.capacidad());
-        sala.setUbicacion(dto.ubicacion());
-        sala.setActiva(activa);
-        return sala;
+        return new Sala(null, dto.codigo(), dto.nombre(), dto.capacidad(), dto.ubicacion(), activa);
     }
 
     public static SalaResponseDTO toResponseDTO(Sala sala) {
@@ -26,7 +22,7 @@ public class SalaMapper {
                 sala.getCapacidad(),
                 sala.getUbicacion(),
                 sala.isActiva(),
-                crearDescripcionCorta(sala)
+                buildDescripcionCorta(sala)
         );
     }
 
@@ -40,7 +36,7 @@ public class SalaMapper {
         }
     }
 
-    private static String crearDescripcionCorta(Sala sala) {
-        return sala.getCodigo() + " - " + sala.getNombre() + " (cap. " + sala.getCapacidad() + ")";
+    private static String buildDescripcionCorta(Sala sala) {
+        return String.format("%s - %s (cap. %d)", sala.getCodigo(), sala.getNombre(), sala.getCapacidad());
     }
 }
