@@ -11,6 +11,6 @@ public class InfoController {
 
     @GetMapping("/info")
     public InfoResponseDTO info() {
-        return new InfoResponseDTO("cowork-api", "1.0.0", "Alejandro Flores");
+        return new InfoResponseDTO("cowork-api", "1.0.0", "Alejandro Arciniega Flores");
     }
 }
