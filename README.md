@@ -1,10 +1,10 @@
-# cowork-api
+﻿# cowork-api
 
 Sistema de Reservas de Sala para CoworkLima S.A.C.
 
 ## Datos
 
-- Alumno: xalej
+- Alumno: Luis
 - Curso: Spring Boot Core / Arquitectura Backend
 - Version: 1.0.0
 - Repositorio publico GitHub: https://github.com/Alejoarflo/cowork-api
