@@ -7,7 +7,7 @@ Sistema de Reservas de Sala para CoworkLima S.A.C.
 - Alumno: xalej
 - Curso: Spring Boot Core / Arquitectura Backend
 - Version: 1.0.0
-- Repositorio publico GitHub: agregar URL del repositorio al subir el proyecto
+- Repositorio publico GitHub: https://github.com/LuisFernandezJAVA/cowork-api.git
 
 ## Como ejecutar
 
